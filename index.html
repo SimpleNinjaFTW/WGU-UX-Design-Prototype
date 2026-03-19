@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visit Taniti</title>
+  <style>
+    :root {
+      --bg: #f3f7fa;
+      --surface: #ffffff;
+      --border: #cfd9e2;
+      --text: #24323f;
+      --muted: #5b6b78;
+      --primary: #1f6f8b;
+      --primary-dark: #15536a;
+      --secondary: #e6eef4;
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topbar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      padding: 10px 14px;
+      background: var(--secondary);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a.active {
+      background: #d5e3ed;
+      outline: none;
+    }
+
+    main {
+      width: 100%;
+    }
+
+    .page {
+      display: none;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px 20px 50px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      background: var(--secondary);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+    }
+
+    h2 {
+      font-size: 1.9rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+    }
+
+    p {
+      margin: 0 0 12px;
+      line-height: 1.6;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .button-row,
+    .pager {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      padding: 11px 15px;
+      border: 1px solid var(--border);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus-visible {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      outline: none;
+    }
+
+    .button.secondary {
+      background: var(--secondary);
+      color: var(--text);
+    }
+
+    .button.secondary:hover,
+    .button.secondary:focus-visible {
+      background: #d5e3ed;
+      outline: none;
+    }
+
+    .section-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .stats,
+    .travel-grid,
+    .booking-grid,
+    .content-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .content-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .travel-grid,
+    .booking-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 18px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 8px;
+      margin-bottom: 10px;
+      background: var(--secondary);
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: bold;
+    }
+
+    .footer-inner a:hover,
+    .footer-inner a:focus-visible {
+      color: var(--primary);
+      outline: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .content-grid,
+      .stats,
+      .travel-grid,
+      .booking-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      h1 {
+        font-size: 1.9rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#home">Visit Taniti</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary navigation">
+        <a href="#home" data-route="home">Home</a>
+        <a href="#activities" data-route="activities">Things to Do</a>
+        <a href="#lodging" data-route="lodging">Lodging</a>
+        <a href="#transportation" data-route="transportation">Transportation</a>
+        <a href="#travel-tips" data-route="travel-tips">Travel Info</a>
+        <a href="#plan" data-route="plan">Plan &amp; Book</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page active" id="home" data-page="home">
+      <div class="hero">
+        <div class="panel">
+          <span class="eyebrow">Welcome to Taniti</span>
+          <h1>Come Visit Taniti!</h1>
+          <p>Taniti is a small, tropical island in the Pacific. While the island has an area of less than 500 square miles, the terrain is varied and includes both sandy and rocky beaches, a small but safe harbor, lush tropical rainforests, and a mountainous interior that includes a small, active volcano</p>
+          <div class="button-row">
+            <a class="button primary" href="#activities">Explore Activities</a>
+            <a class="button secondary" href="#plan">Plan &amp; Book</a>
+          </div>
+
+          <div class="stats">
+            <div class="card">
+              <h3>Natural Attractions</h3>
+              <p>Beaches, rainforests, sightseeing, and more</p>
+            </div>
+            <div class="card">
+              <h3>Places to Stay</h3>
+              <p>Compare hotels, resorts, B&Bs, and other options</p>
+            </div>
+            <div class="card">
+              <h3>Travel Basics</h3>
+              <p>Transportation, safety, customs, and visitor tips</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <img class="section-image" src="https://media.cntraveler.com/photos/5c742ca622089944616575a8/16:9/w_4000,h_2250,c_limit/Laucala-Island_2019_Laucala_restaurant_seagrass1.jpg">
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <article class="card">
+          <span class="tag">Things to Do</span>
+          <h3>Explore attractions</h3>
+          <img class="section-image" src="https://i.natgeofe.com/n/1c972ffb-1411-4fe2-9cec-68ab15a28660/2103_BURKARD_14441.jpg">
+          <p>View beaches, rainforests, volcanoes, and entertainment options.</p>
+          <a class="button secondary" href="#activities">View activities</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">Lodging</span>
+          <h3>Compare places to stay</h3>
+          <img class="section-image" src="https://destinationdeluxe.com/wp-content/uploads/2021/03/Laucala-Island-Fiji-Private-Island-Resorts-Destination-Deluxe.jpg">
+          <p>Review accommodation types and compare options.</p>
+          <a class="button secondary" href="#lodging">See lodging</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">Travel Info</span>
+          <h3>Find visitor essentials</h3>
+          <img class="section-image" src="https://media.cnn.com/api/v1/images/stellar/prod/180531153404-1-maya-bay-thailand.jpg?q=x_2,y_0,h_898,w_1596,c_crop/h_833,w_1480">
+          <p>Check transportation, safety, and payment information.</p>
+          <a class="button secondary" href="#travel-tips">Read travel info</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="page" id="activities" data-page="activities">
+      <span class="eyebrow">Things to Do</span>
+      <h2>Taniti’s Attractions</h2>
+
+      <div class="content-grid">
+        <article class="card">
+          <span class="tag">Beaches</span>
+          <h3>Beach Visits</h3>
+          <img class="section-image" src="https://images.unsplash.com/photo-1468413253725-0d5181091126?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aXNsYW5kJTIwYmVhY2h8ZW58MHx8MHx8fDA%3D">
+          <p>Relax by the beach, take a swim, and take in the view!</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Outdoors</span>
+          <h3>Rainforest Adventures</h3>
+          <img class="section-image" src="https://reefrainforest.com/wp-content/uploads/2014/03/Tobago-Overview.jpg">
+          <p>Get in on some beautiful nature sightseeing and more active experiences.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Sightseeing</span>
+          <h3>Volcano Area</h3>
+          <img class="section-image" src="https://s.abcnews.com/images/International/new-zealand-white-island-volcano-eruption-ap-19120_hpMain_20191211-060258_16x9_992.jpg">
+          <p>Take a look at the island’s volcano.</p>
+        </article>
+      </div>
+
+      <div class="travel-grid">
+        <article class="card">
+          <span class="tag">More Options</span>
+          <h3>Other entertainment</h3>
+          <ul>
+            <li>Snorkeling</li>
+            <li>Fishing tours</li>
+            <li>Museum visits</li>
+            <li>Zip-Lining</li>
+            <li>Art galleries</li>
+            <li>Helicopter rides</li>
+            <li>Bowling & Arcade</li>
+            <li>Coming Soon: 9-Hole Golf Course</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="pager">
+        <a class="button secondary" href="#home">Back Home</a>
+        <a class="button primary" href="#lodging">Next: Lodging</a>
+      </div>
+    </section>
+
+    <section class="page" id="lodging" data-page="lodging">
+      <span class="eyebrow">Lodging</span>
+      <h2>Pick out a place that's right for you and your budget</h2>
+
+      <div class="content-grid">
+        <article class="card">
+          <span class="tag">Hotels</span>
+          <h3>Hotel stays</h3>
+          <img class="section-image" src="https://www.theislandhotel.eu/wp-content/uploads/sites/4/MG_9313-1.jpg">
+          <p>A simple choice for tourists looking for a great place to stay</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Smaller Stays</span>
+          <h3>Bed and breakfasts</h3>
+          <img class="section-image" src="https://sanjuan.objects.liquidweb.services/photos/85697-61344-otterspondfront.png">
+          <p>A more personal option for visitors who want a smaller stay.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Resorts</span>
+          <h3>Resorts</h3>
+          <img class="section-image" src="https://digital.ihg.com/is/image/ihg/intercontinental-hayman-island-6087710419-2x1">
+          <p>A higher-end option for visitors looking for a more upscale experience.</p>
+        </article>
+      </div>
+
+      <div class="travel-grid">
+        <article class="card">
+          <h3>Helpful Details</h3>
+          <ul>
+            <li>We have family-owned hotels on the island</li>
+            <li>We offer a range of options, from inexpensive hostels to a 4-star resort</li>
+            <li>All types of lodging are strictly regulated and regularly inspected by the Tanitian government</li>
+            <li>Power outlets are 120 volts (the same as in the United States).</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <img class="section-image" src="https://digital.ihg.com/is/image/ihg/intercontinental-bora-bora-9636653008-1x1">
+        </article>
+      </div>
+
+      <div class="pager">
+        <a class="button secondary" href="#activities">Back: Activities</a>
+        <a class="button primary" href="#transportation">Next: Transportation</a>
+      </div>
+    </section>
+
+    <section class="page" id="transportation" data-page="transportation">
+      <span class="eyebrow">Transportation</span>
+      <h2>Getting around the island</h2>
+
+      <div class="travel-grid">
+        <article class="card">
+          <span class="tag">Arrival</span>
+          <h3>Getting to the island</h3>
+          <img class="section-image" src="https://uploads.flytradewind.com/app/uploads/2021/10/20150146/VIJ-Wing-2.webp">
+          <p>Almost all visitors arrive to Taniti by air, though some arrive on a small cruise ship that docks in Yellow Leaf Bay for one night per week.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Getting Around</span>
+          <h3>Transportation options</h3>
+          <ul>
+            <li>Rental cars</li>
+            <li>Taxis</li>
+            <li>Buses</li>
+            <li>Bikes</li>
+            <li>Walkable areas</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <article class="card">
+          <span class="tag">Rental Cars</span>
+          <h3>Flexible travel</h3>
+          <p>Travel on your own time. Rental cars can be rented from a local rental agency near the airport. Bikes and helmets are available to rent from several vendors (helmets are required by law)</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Walking</span>
+          <h3>Explore on foot</h3>
+          <p>Taniti City is fairly flat and very walkable. Many tourists stay in the area surrounding Merriton Landing: this area is easy to explore on foot.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Transit</span>
+          <h3>Public transportation</h3>
+          <p>Public buses serve Taniti City and run from 5 a.m. to 11 p.m. Additionally, Taxis are available in Taniti City</p>
+        </article>
+      </div>
+
+      <div class="pager">
+        <a class="button secondary" href="#lodging">Back: Lodging</a>
+        <a class="button primary" href="#travel-tips">Next: Travel Info</a>
+      </div>
+    </section>
+
+    <section class="page" id="travel-tips" data-page="travel-tips">
+      <span class="eyebrow">Travel Information</span>
+      <h2>Important Details</h2>
+
+      <div class="travel-grid">
+        <article class="card">
+          <span class="tag">Money</span>
+          <h3>Currency and payments</h3>
+          <p>Taniti uses the U.S. dollar as its currency, but many businesses will also accept euros and yen. Several banks facilitate currency exchange, and many businesses accept major credit cards.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Language</span>
+          <h3>Communication</h3>
+          <p>Many younger Tanitians speak fluent English. However, very little English is spoken in rural areas, especially by the older residents.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Safety</span>
+          <h3>Health and safety</h3>
+          <p>There is one hospital and several clinics. The hospital has many multilingual employees.</p>
+          <p>Violent crime is very rare on Taniti, but as tourism increases, there are more reports of pickpocketing and other petty crimes. Please ensure that you safeguard your belongings</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Planning</span>
+          <h3>Rules</h3>
+          <p>Alcohol is not allowed to be served or sold between the hours of midnight and 9:00 a.m. The drinking age on Taniti is 18.</p>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <article class="card">
+          <span class="tag">Dining</span>
+          <h3>Food</h3>
+          <img class="section-image" src="https://img.cdn4dd.com/cdn-cgi/image/fit=cover,width=600,height=400,format=auto,quality=80/https://doordash-static.s3.amazonaws.com/media/store/header/519cb774-963e-4145-af3d-313b1ffeff9e.jpg">
+          <p>Taniti has many resturaunts, including fish & rice, American-Style meals, and Pan Asian cuisine. Additionally, Taniti bolsters supermarkets and various other grocery options</p>
+          <p>Taniti enjoys a large number of national holidays, and many tourist attractions and restaurants will be closed on holidays, so plan accordingly!</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Essentials</span>
+          <h3>What to know before arriving</h3>
+          <ul>
+            <li>Payment and currency</li>
+            <li>Transportation</li>
+            <li>Medical access</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="pager">
+        <a class="button secondary" href="#transportation">Back: Transportation</a>
+        <a class="button primary" href="#plan">Next: Plan &amp; Book</a>
+      </div>
+    </section>
+
+    <section class="page" id="plan" data-page="plan">
+      <span class="eyebrow">Plan &amp; Book</span>
+      <h2>Plan Your Trip to Our Island</h2>
+
+      <div class="booking-grid">
+        <article class="card">
+          <span class="tag">Step 1</span>
+          <h3>Review lodging options</h3>
+          <p>Compare your options to make sure you pick what's right for you!</p>
+          <a class="button secondary" href="#lodging">Go to Lodging</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">Step 2</span>
+          <h3>Educate yourself on our transportation options</h3>
+          <p>Make sure you can get around the island!</p>
+          <a class="button secondary" href="#transportation">Go to Transportation</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">Step 3</span>
+          <h3>Explore activities</h3>
+          <p>Plan to see the attractions that stick out to you!</p>
+          <a class="button secondary" href="#activities">Go to Activities</a>
+        </article>
+
+        <article class="card">
+          <span class="tag">Step 4</span>
+          <h3>Learn the basics</h3>
+          <p>Review travel information to make sure you're well-informed for your stay!</p>
+          <a class="button secondary" href="#travel-tips">Go to Travel Info</a>
+        </article>
+      </div>
+
+      <div class="travel-grid">
+        <article class="card">
+          <img class="section-image" src="https://img.freepik.com/premium-photo/happy-asian-family-enjoy-cruise-holiday-adventure-by-boat-trip-beautiful-nature-landscape-lake-mountain-vacation-travel-asia-khao-sok-national-park-surat-thani-guilin-thailand_536080-395.jpg">
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="#home">Home</a>
+      <a href="#activities">Activities</a>
+      <a href="#plan">Plan &amp; Book</a>
+    </div>
+  </footer>
+
+  <script>
+    const pages = Array.from(document.querySelectorAll('.page'));
+    const navLinks = Array.from(document.querySelectorAll('[data-route]'));
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('primary-nav');
+    const validRoutes = pages.map(page => page.dataset.page);
+
+    function currentRoute() {
+      const hash = window.location.hash.replace('#', '');
+      return validRoutes.includes(hash) ? hash : 'home';
+    }
+
+    function showRoute(route) {
+      pages.forEach(page => {
+        page.classList.toggle('active', page.dataset.page === route);
+      });
+
+      navLinks.forEach(link => {
+        const active = link.dataset.route === route;
+        link.classList.toggle('active', active);
+        if (active) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+
+      document.title = 'Visit Taniti | ' + route.replace(/-/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase());
+      window.scrollTo(0, 0);
+    }
+
+    function handleRoute() {
+      showRoute(currentRoute());
+      if (window.innerWidth <= 760) {
+        nav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('load', handleRoute);
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  </script>
+</body>
+</html>
